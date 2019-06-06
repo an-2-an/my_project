@@ -1,0 +1,842 @@
+=======================================================
+======================11===============================
+=======================================================
+
+Ñ€Ð°Ð²Ð½Ð¾Ð¼ÐµÑ€Ð½Ð¾Ðµ Ð¸ Ð½Ð¾Ñ€Ð¼Ð°Ð»ÑŒÐ½Ð¾Ðµ Ñ€Ð°ÑÐ¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¸Ðµ
+------------------------------------------------
+
+import random as rnd
+
+d = 100.0
+n = 20
+k = 5000
+
+randoms = [rnd.random() * d for i in range(k)]
+
+a = [0] * n
+
+for r in randoms:
+    index = int(r / d * n)
+    a[index] += 1
+
+print('\n'.join([str(e) for e in a]) + '\n')
+
+randoms = [rnd.normalvariate(d/2, d/10) for i in range(k)]
+
+a = [0] * n
+
+for r in randoms:
+    index = int(r / d * n)
+    a[index] += 1
+
+print('\n'.join([str(e) for e in a]))
+------------------------------------------------
+
+DICT - Ð¿Ñ€Ð¾Ð´Ð¾Ð»Ð¶Ð°ÐµÐ¼...
+
+---------------------
+dict1 = {}
+countries = ['USA', 'Russia']
+capitals = ['Washington', 'Moscow']
+
+for c1, c2 in countries, capitals: #wrong way
+    dict1[c1] = c2
+print(dict1)
+
+dict2 = dict(zip(countries, capitals))
+print(dict2)
+---------------------
+
+race = {'Bob': 190, 'Bill': 187, 'Mike': 191, 'Bee': 187}
+record = min(race.values())
+winners = [k for (k, v) in race.items() if v == record]
+if len(winners) == 1:
+    print('winner is {} with {} sec.'.format(winners[0], record))
+else:
+    print('winners are {} with {} sec.'.format(', '.join(winners), record))
+---------------------
+**kwargs
+
+def print_sum(x, y):
+    print(x+y)
+
+d1 = {'x': 2, 'y': 17}
+print_sum(**d1)
+
+---------------------
+
+line = 'one two three four one one two two one three'
+words = {}
+
+for word in line.split():
+    if word in words.keys():
+        words[word] += 1
+    else:
+        words[word] = 1
+
+print(words)
+
+for e, k in sorted([(e, k) for (k, e) in words.items()], reverse=True):
+    print('{} -> {}'.format(k, e))
+---------------------
+
+line = 'one two three four one one two two one three'
+chars = {}
+
+for char in line:
+    if char in chars.keys():
+        chars[char] += 1
+    else:
+        chars[char] = 1
+
+print(chars)
+
+for key in sorted(chars.keys()):
+    print('\'{}\' -> {}'.format(key, chars[key]))
+---------------------
+
+d = {'list': 'array', 'bye': 'goodbye', 'hello': 'hi'}
+d1= {}
+
+for (i1, i2) in d.items():
+    d1[i2] = i1
+    d1[i1] = i2
+
+print(d1)
+
+word = input('input word: ')
+syn = d1.get(word, 'not find')
+print(syn)
+---------------------
+
+McCain 10
+McCain 5
+Obama 9
+Obama 8
+McCain 1
+---------------------
+ 
+Ð”Ð»Ñ ÐºÐ°Ð¶Ð´Ð¾Ð³Ð¾ Ñ„Ð°Ð¹Ð»Ð° Ð¸Ð·Ð²ÐµÑÑ‚Ð½Ð¾, Ñ ÐºÐ°ÐºÐ¸Ð¼Ð¸ Ð´ÐµÐ¹ÑÑ‚Ð²Ð¸ÑÐ¼Ð¸ Ð¼Ð¾Ð¶Ð½Ð¾ Ðº Ð½ÐµÐ¼Ñƒ Ð¾Ð±Ñ€Ð°Ñ‰Ð°Ñ‚ÑŒÑÑ:
+
+Ð·Ð°Ð¿Ð¸ÑÑŒ W,
+Ñ‡Ñ‚ÐµÐ½Ð¸Ðµ R,
+Ð·Ð°Ð¿ÑƒÑÐº X.
+---------------------
+Ð’ Ð³ÐµÐ½ÐµÐ°Ð»Ð¾Ð³Ð¸Ñ‡ÐµÑÐºÐ¾Ð¼ Ð´Ñ€ÐµÐ²Ðµ Ñƒ ÐºÐ°Ð¶Ð´Ð¾Ð³Ð¾ Ñ‡ÐµÐ»Ð¾Ð²ÐµÐºÐ°, ÐºÑ€Ð¾Ð¼Ðµ Ñ€Ð¾Ð´Ð¾Ð½Ð°Ñ‡Ð°Ð»ÑŒÐ½Ð¸ÐºÐ°, ÐµÑÑ‚ÑŒ Ñ€Ð¾Ð²Ð½Ð¾ Ð¾Ð´Ð¸Ð½ Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»ÑŒ.
+ÐšÐ°Ð¶Ð´Ð¾Ð¼ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ñƒ Ð´ÐµÑ€ÐµÐ²Ð° ÑÐ¾Ð¿Ð¾ÑÑ‚Ð°Ð²Ð»ÑÐµÑ‚ÑÑ Ñ†ÐµÐ»Ð¾Ðµ Ð½ÐµÐ¾Ñ‚Ñ€Ð¸Ñ†Ð°Ñ‚ÐµÐ»ÑŒÐ½Ð¾Ðµ Ñ‡Ð¸ÑÐ»Ð¾, Ð½Ð°Ð·Ñ‹Ð²Ð°ÐµÐ¼Ð¾Ðµ Ð²Ñ‹ÑÐ¾Ñ‚Ð¾Ð¹. 
+Ð£ Ñ€Ð¾Ð´Ð¾Ð½Ð°Ñ‡Ð°Ð»ÑŒÐ½Ð¸ÐºÐ° Ð²Ñ‹ÑÐ¾Ñ‚Ð° Ñ€Ð°Ð²Ð½Ð° 0, Ñƒ Ð»ÑŽÐ±Ð¾Ð³Ð¾ Ð´Ñ€ÑƒÐ³Ð¾Ð³Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð° Ð²Ñ‹ÑÐ¾Ñ‚Ð° Ð½Ð° 1 Ð±Ð¾Ð»ÑŒÑˆÐµ, Ñ‡ÐµÐ¼ Ñƒ ÐµÐ³Ð¾ Ñ€Ð¾Ð´Ð¸Ñ‚ÐµÐ»Ñ.
+Ð’Ð°Ð¼ Ð´Ð°Ð½Ð¾ Ð³ÐµÐ½ÐµÐ°Ð»Ð¾Ð³Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ Ð´Ñ€ÐµÐ²Ð¾, Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»Ð¸Ñ‚Ðµ Ð²Ñ‹ÑÐ¾Ñ‚Ñƒ Ð²ÑÐµÑ… ÐµÐ³Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð².
+
+ÐÐ´Ð°Ð¼ ÐšÐ°Ð¸Ð½
+ÐšÐ°Ð¸Ð½ Ð•Ð½Ð¾Ñ…
+ÐÐ´Ð°Ð¼ ÐÐ²ÐµÐ»ÑŒ
+ÐÐ´Ð°Ð¼ Ð¡Ð¸Ñ„
+Ð¡Ð¸Ñ„ Ð•Ð½Ð¾Ñ
+Ð•Ð½Ð¾Ñ ÐšÐ°Ð¸Ð½Ð°Ð½
+
+
+def height(man):
+    if man not in p_tree:
+        return 0
+    else:
+        return 1 + height(p_tree[man])
+
+p_tree = {}
+
+with open('genialogy.txt', 'r', encoding='utf-8') as f:
+    for line in f.readlines():
+        print(line)
+        parent, child = line.strip().split()
+        p_tree[child] = parent
+        
+heights = {}
+
+for man in set(p_tree.keys()).union(set(p_tree.values())):
+    heights[man] = height(man)
+
+for key, value in sorted(heights.items(), key=lambda kv: kv[1]):
+    print(key, value)
+---------------------
+FAKE DATA
+https://mockaroo.com/
+
+keys=columns
+[id,first_name,last_name,email,gender,ip_address,pet,age,car,car_year]
+--------------------------------------
+data = []
+keys = []
+
+with open('MOCK_DATA.csv', 'r') as f:
+    lines = f.readlines()
+    keys = lines[0].strip().split(',')
+    #print(keys)
+    for line in lines[1:]:
+        values = line.strip().split(',')
+        item = dict(zip(keys, values)) 
+        data.append(item)
+
+#print(data[100])
+
+cars = [i['car'] for i in data]
+
+for n, car in enumerate(sorted(set(cars)), start=1):
+    print(n, car, cars.count(car))
+----------------------------------------
+
+Ð”Ð—
+Ð² Ñ„Ð°Ð¹Ð»Ðµ districts.txt ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ñ‚ÑÑ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ
+Ð¾ Ñ‡Ð¸ÑÐ»ÐµÐ½Ð½Ð¾ÑÑ‚Ð¸ Ð½Ð°ÑÐµÐ»ÐµÐ½Ð¸Ñ (Ñ‚Ñ‹Ñ.Ð¶Ð¸Ñ‚ÐµÐ»ÐµÐ¹) Ñ€Ð°Ð¹Ð¾Ð½Ð¾Ð² Ð³Ð¾Ñ€Ð¾Ð´Ð¾Ð²
+Ð—Ð°Ð¿Ð¾Ñ€Ð¾Ð¶ÑŒÑ Ð¸ Ð¥Ð°Ñ€ÑŒÐºÐ¾Ð²Ð°
+
+Ð¸Ð·Ð²Ð»ÐµÑ‡ÑŒ ÑÑ‚Ð¸ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð¸ ÑÑ„Ð¾Ñ€Ð¼Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ ÑÐ»Ð¾Ð²Ð°Ñ€ÑŒ,
+ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ñ‰Ð¸Ð¹ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð¿Ð¾ ÐºÐ°Ð¶Ð´Ð¾Ð¼Ñƒ Ð³Ð¾Ñ€Ð¾Ð´Ñƒ:
+ÑÐ¿Ð¸ÑÐ¾Ðº Ñ€Ð°Ð¹Ð¾Ð½Ð¾Ð² (Ð¿Ð¾ Ð°Ð»Ñ„Ð°Ð²Ð¸Ñ‚Ñƒ) Ð¸ Ð¾Ð±Ñ‰Ð°Ñ Ñ‡Ð¸ÑÐ»ÐµÐ½Ð½Ð¾ÑÑ‚ÑŒ Ð½Ð°ÑÐµÐ»ÐµÐ½Ð¸Ñ
+
+
+Ð² Ð²Ð¸Ð´Ðµ:
+{'Ð¥Ð°Ñ€ÑŒÐºÐ¾Ð²': {'districts': ['Ð˜Ð½Ð´ÑƒÑÑ‚Ñ€Ð¸Ð°Ð»ÑŒÐ½Ñ‹Ð¹', 'ÐšÐ¸ÐµÐ²ÑÐºÐ¸Ð¹', 'ÐœÐ¾ÑÐºÐ¾Ð²ÑÐºÐ¸Ð¹', 'ÐÐ¾Ð²Ð¾Ð±Ð°Ð²Ð°Ñ€ÑÐºÐ¸Ð¹', 'ÐžÑÐ½Ð¾Ð²ÑÐ½ÑÐºÐ¸Ð¹', 'Ð¡Ð»Ð¾Ð±Ð¾Ð´ÑÐºÐ¾Ð¹', 'Ð¥Ð¾Ð»Ð¾Ð´Ð½Ð¾Ð³Ð¾Ñ€ÑÐºÐ¸Ð¹', 'Ð¨ÐµÐ²Ñ‡ÐµÐ½ÐºÐ¾Ð²ÑÐºÐ¸Ð¹'], 'population': 793}, 
+'Ð—Ð°Ð¿Ð¾Ñ€Ð¾Ð¶ÑŒÐµ': {'districts': ['ÐÐ»ÐµÐºÑÐ°Ð½Ð´Ñ€Ð¾Ð²ÑÐºÐ¸Ð¹', 'Ð’Ð¾Ð·Ð½ÐµÑÐµÐ½Ð¾Ð²ÑÐºÐ¸Ð¹', 'Ð”Ð½ÐµÐ¿Ñ€Ð¾Ð²ÑÐºÐ¸Ð¹', 'Ð—Ð°Ð²Ð¾Ð´ÑÐºÐ¸Ð¹', 'ÐšÐ¾Ð¼Ð¼ÑƒÐ½Ð°Ñ€ÑÐºÐ¸Ð¹', 'ÐšÐ¾ÑÐ¼Ð¸Ñ‡ÐµÑÐºÐ¸Ð¹', 'Ð¥Ð¾Ñ€Ñ‚Ð¸Ñ†ÐºÐ¸Ð¹', 'Ð¨ÐµÐ²Ñ‡ÐµÐ½ÐºÐ¾Ð²ÑÐºÐ¸Ð¹'], 'population': 786}}
+
+
+========================================================
+=======================12===============================
+========================================================
+Ð”ÐµÐºÐ¾Ñ€Ð°Ñ‚Ð¾Ñ€Ñ‹
+
+# Functions can be referred by variables
+def say1():
+    print('hello!')
+
+say2 = say1
+
+say2()
+print(say2 is say1)
+print(say2 == say1)
+------------------------------------------------
+# Functions can be passed as arguments to another function
+def say_hello(func):
+    print("Hello")
+    func()
+
+def say_hi():
+    print("Hi")
+  
+say_hello(say_hi)
+------------------------------------------------
+# Functions can be defined inside another function
+def say_hello():
+    print("Hello")
+  
+    def say_hi():
+        print("Hi")
+    
+    say_hi()
+
+say_hello()
+------------------------------------------------
+# Functions can return references to another function
+def say_hello():
+    print("Hello")
+  
+    def say_hi():
+        print("Hi")
+    
+    return say_hi
+
+say_hi_func = say_hello()
+
+say_hi_func() 
+------------------------------------------------
+def say_hello(hello_var):
+    print(hello_var)
+      
+    def say_hi(hi_var):
+        print(hello_var + " " + hi_var)
+        
+    return say_hi
+  
+# Print Hello and returns say_hi function which gets stored in say_hi_func variable
+say_hi_func = say_hello("Hello")
+
+# Call say_hi function and print "Hello Hi"
+say_hi_func("Hi")
+
+
+-------------------------------------------------
+тут были потеряны данные про декораторы
+про запись xls xlwt
+про faker
+-------------------------------------------------
+
+=========================================================
+=====================14==================================
+=========================================================
+
+Переменное число параметров
+
+Когда мы объявляем параметр со звездочкой (например, *param), 
+все позиционные аргументы, начиная с этой позиции и до конца, 
+будут собраны в кортеж под именем param. Аналогично, когда 
+мы объявляем параметры с двумя звездочками (**param), все 
+ключевые аргументы, начиная с этой позиции и до конца, 
+будут собраны в словарь под именем param.
+
+def total(initial, *numbers, **keywords):
+    count = initial
+    for number in numbers:
+        count += number
+    for key in keywords:
+        count += keywords[key]
+    return count
+
+s = total(1000, 200, 300, 100, a=10, b=30)
+print(s)
+
+
+---------------------
+
+белка - оборотень
+
+squirrel.csv
+
+
+
+import math
+
+JOURNAL = []
+f = open('squirrel.csv', 'r')
+for line in f:
+    events = line.strip().split(',')
+    squirrel = int(events[-1])
+    events = events[:-1]
+    day = {'events': events, 'squirrel': squirrel}
+    print(day)
+    JOURNAL.append(day)
+f.close()
+
+
+events = []
+for day in JOURNAL:
+    day_events = day['events']
+    for event in day_events:
+        if not(event in events):
+            events.append(event)
+
+print(len(events))
+print(events)
+
+items = []
+
+for event in events:
+    print(event)
+    n11 = 0
+    n10 = 0
+    n01 = 0
+    n00 = 0
+    for day in JOURNAL:
+        if (day['squirrel']) and (event in day['events']):
+            n11 += 1
+        if (day['squirrel']) and not(event in day['events']):
+            n10 += 1
+        if not(day['squirrel']) and (event in day['events']):
+            n01 += 1
+        if not(day['squirrel']) and not(event in day['events']):
+            n00 += 1
+    phi = (n11 * n00 - n10 * n01) / math.sqrt((n11 + n10) * (n01 + n00) * (n11 + n01) * (n10 + n00))
+    items.append({'event': event, 'phi': phi})
+
+#items = sorted(items, key=lambda k: k['phi'])
+
+items.sort(key=lambda k: -k['phi'])
+for item in items:
+    print(item)
+
+-------------------------------------------------
+!!!!!!!!!!!!!
+ООП (oop.txt)
+!!!!!!!!!!!!!
+
+---------------------
+
+=================================================
+===================15============================
+=================================================
+
+Playboy Girls
+
+import tkinter as tk
+import csv
+
+girls = []
+
+with open('girls.csv', 'r', encoding='utf-8') as f:
+    reader = csv.DictReader(f)
+    for r in reader:
+        girls.append(dict(r))
+
+if __name__ == '__main__':
+
+    w, h = 1200, 600
+    root = tk.Tk()
+    root.geometry('+0+0')
+    canvas = tk.Canvas(root, width=w, height=h, borderwidth=1, relief='solid', bg='white')
+    canvas.pack()
+    canvas.create_line((w*0.1, h*0.1), (w*0.9, h*0.1), dash=(1,1))
+    canvas.create_line((w*0.1, h*0.9), (w*0.9, h*0.9), dash=(1,1))
+    canvas.create_line((w*0.1, h*0.1), (w*0.1, h*0.9), dash=(1,1))
+    canvas.create_line((w*0.9, h*0.1), (w*0.9, h*0.9), dash=(1,1))
+    axes = ('Height', 'Weight')
+    canvas.create_text((w/2, 0), text=axes[0], font=('Courier', 20), anchor='n')
+    canvas.create_text((0, h/2), text=axes[1], font=('Courier', 20), anchor='w')
+    max_v1 = max([int(g[axes[0]]) for g in girls])
+    min_v1 = min([int(g[axes[0]]) for g in girls])
+    dv1 = max_v1 - min_v1
+    canvas.create_text((w*0.1, 0), text=str(min_v1), font=('Courier', 16), anchor='n')
+    canvas.create_text((w*0.9, 0), text=str(max_v1), font=('Courier', 16), anchor='n')
+    max_v2 = max([int(g[axes[1]]) for g in girls])
+    min_v2 = min([int(g[axes[1]]) for g in girls])
+    dv2 = max_v2 - min_v2
+    canvas.create_text((0, h*0.1), text=str(max_v2), font=('Courier', 16), anchor='w')
+    canvas.create_text((0, h*0.9), text=str(min_v2), font=('Courier', 16), anchor='w')
+    ovals = []
+    nums = [7, 507, 67, 79, 173, 241, 97, 65]
+
+    for i in range(len(girls)):
+        girl = girls[i]
+        v1, v2 = int(girl[axes[0]]), int(girl[axes[1]])
+        x, y = w/10 + (v1 - min_v1)/ dv1 * w * 0.8, h - (h/10 + (v2 - min_v2) / dv2 * h *0.8)
+        oval = canvas.create_oval((x-15, y-15), (x+15, y+15), fill='white')
+        ovals.append(oval)
+        canvas.create_text((x, y), text=str(i), font=('Courier', 7))
+        if i in nums:
+            canvas.create_text((x, y+20), text=(girls[i]['Month']+girls[i]['Year']), font=('Courier', 10), fill='red')
+            canvas.itemconfig(ovals[-1], fill='yellow')
+
+    root.mainloop()
+    
+----------------------------------------------------------
+
+модуль collections
+
+DEFAULTDICT
+
+from collections import defaultdict
+
+di = defaultdict(int)
+
+keys = ['first', 'second', 'third']
+for i, k in enumerate(keys):
+	di[k] = i
+
+print(di)
+d1 = dict(di)
+print(d1)
+
+ds = defaultdict(str)
+for k in keys:
+	ds[k]
+print(ds)
+
+s = [('yellow', 1), ('blue', 2), ('yellow', 3), ('blue', 4), ('blue', 1)]
+d = defaultdict(list)
+for k, v in s:
+    d[k].append(v)
+print(d)
+
+
+class Shark:
+    def __init__(self, name='Lava'):
+        self.name = name
+        print('hi,', name)
+    def __str__(self):
+        return f'Shark {self.name}'
+
+dsh = defaultdict(Shark)
+for k in keys:
+    dsh[k] = Shark(k)
+print(dsh)
+for key in dsh:
+    print(dsh[key])
+
+----------------------------------------------------------
+COUNTER
+
+from collections import Counter
+
+spam = ['a', 'b', 'c', 'a', 'a', 'c']
+c = Counter(spam)
+
+print(c)
+
+--------------------------------
+
+from collections import Counter
+import re
+
+words = re.findall(r'\w+', open('hamlet.txt').read().lower())
+#print(words)
+
+c = Counter(words)
+print(c)
+commons = c.most_common(10)
+print(commons)
+
+for w, n in commons:
+    print(n, w)
+----------------------------------------------------------
+NAMEDTUPLE
+
+from collections import namedtuple
+
+Car = namedtuple('Car', 'model, volume, price')
+mycar = Car('BMW', 3000, 22.0)
+
+print(mycar)
+print(mycar.model)
+print(mycar[0])
+#print(mycar['model']) ERROR
+
+----------------------------------------------------------
+
+OOP.txt
+fractions
+cats
+
+----------------------------------------------------------
+
+
+
+------------------
+
+try_test
+
+----------------
+
+
+
+постфиксный стек
+
+
+store = []
+line = 'ab-c*def^/+'
+
+vals = {'a': 4, 'b': 1, 'c': 5, 'd': 64, 'e': 2, 'f': 5}
+
+for ch in line:
+    if ch in vals.keys():
+        store.append(vals[ch])
+    if ch in '+-*/^':
+        op2 = store.pop()
+        op1 = store.pop()
+        if ch == '+': res = op1 + op2
+        if ch == '-': res = op1 - op2
+        if ch == '*': res = op1 * op2
+        if ch == '/': res = op1 / op2
+        if ch == '^': res = op1 ** op2
+        store.append(res)
+    print(store)
+---------------------
+
+TIME, DATETIME
+
+import time
+
+t1 = time.time() # секунды с начала эпохи
+print(t1, type(t1))
+
+t2 = time.ctime() # текущее время в строку
+print(t2, type(t2))
+
+t3 = time.ctime(0) # начало эпохи в строку
+print(t3, type(t3))
+
+t4 = time.ctime(t1) # текущее время в строку
+print(t4, type(t4))
+
+t5 = time.gmtime() # текущее время в формате struct_time
+print(t5, type(t5))
+
+t6 = time.gmtime(1000000) # млн.сек с начала эпохи в формате struct_time
+print(t6, type(t6))
+
+s1 = time.strftime('%d.%m.%y', t6) #если без 2арг. - текущ.
+print(s1)
+
+s2 = time.strftime('%H:%M:%S', t6)
+print(s2)
+
+s3 = time.strftime('%d of %B, %A, timezone: %Z') #щас
+print(s3)
+
+dt = 2.2
+T1 = time.time()
+time.sleep(dt)
+T2 = time.time()
+DT = T2 - T1
+print(DT)
+print('delta = {:.3f}%'.format((DT - dt) / dt * 100.0))
+
+------------------------------------------------------------
+
+import datetime
+
+d1 = datetime.date(2018, 12, 1)
+print(d1, type(d1))
+print('{:0>2}.{:0>2}.{}'.format(d1.day, d1.month, d1.year))
+
+d2 = datetime.date.today()
+print(d2, type(d2))
+print('{:0>2}.{:0>2}.{}'.format(d2.day, d2.month, d2.year))
+
+d3 = datetime.datetime(2017, 3, 5, 12, 30, 10)
+print(d3, type(d3))
+print('{:0>2}.{:0>2}.{} {:0>2}:{:0>2}:{:0>2}'.format(d3.day, d3.month,
+                                 d3.year, d3.hour, d3.minute, d3.second))
+
+d4 = datetime.datetime.now()
+print(d4, type(d4))
+print('{:0>2}.{:0>2}.{} {:0>2}:{:0>2}:{:0>2}'.format(d4.day, d4.month,
+                                 d4.year, d4.hour, d4.minute, d4.second))
+
+
+s1 = datetime.datetime.strftime(d3, "%Y.%m.%d <--> %H:%M:%S")
+print(s1)
+s2 = datetime.datetime.strftime(d4, "/%Y.%m.%d/%H:%M:%S/")
+print(s2)
+
+d5 =  d3 + datetime.timedelta(days=1, hours=2, minutes=3, seconds=15)
+print(str(d5))
+
+------------------------------------------------------------------------------
+#nearest Friday the 13th
+
+import datetime
+
+now = datetime.datetime.now()
+
+for i in range(1, 1000):
+    d1 =  now + datetime.timedelta(days=i)
+    print(d1.day, d1.weekday())
+    if d1.day == 13 and d1.weekday() == 4:
+        print('TADAM!', str(d1))
+        break
+
+-------------------------------------------------------------------------------
+
+секундомер tkinter
+
+
+import time, tkinter as tk
+
+root = tk.Tk()
+t = 0.0
+is_pause = False
+is_stop = False
+
+label = tk.Label(root, font='courier 50', width=10)
+label.pack()
+
+b1 = tk.Button(root, font='courier 50', width=10, text='start')
+b1.pack()
+
+b2 = tk.Button(root, font='courier 50', width=10, text='pause')
+b2.pack()
+
+b3 = tk.Button(root, font='courier 50', width=10, text='stop')
+b3.pack()
+
+def start():
+    global t, is_pause, is_stop
+    is_pause, is_stop = False, False
+    #print(t)
+    now = time.time()
+    go_on = True
+    while True:
+        dt = time.time() - now
+        label['text'] = '{:.1f}'.format(t + dt)
+        root.update()
+        time.sleep(0.2)
+        if is_pause:
+            t = t + dt
+            break
+        if is_stop:
+            t = 0.0
+            break
+        
+b1['command'] = start
+
+def pause():
+    global is_pause
+    is_pause = True
+
+b2['command'] = pause
+
+def stop():
+    global is_stop
+    is_stop = True
+
+b3['command'] = stop
+
+root.mainloop()
+----------------------------------
+
+=========
+МНОЖЕСТВА
+=========
+уникальные ненумерованные значения
+
+операции:
+A.union(B)
+A.intersection(B)
+A.difference(B)
+A.symmetric_difference(B)
+A.issubset(B)
+---------------------
+
+A = {1,2,3,4}
+B = {0,2,4,6,8}
+
+print(A.union(B))
+print(A.intersection(B))
+print(A.difference(B))
+print(A.symmetric_difference(B))
+print(A.issubset(B))
+---------------------
+
+количество слов в тексте
+---------------------
+
+n = 10
+all_nums = set(range(1,n+1))
+print(all_nums)
+
+while len(all_nums) > 1:
+    line = input('введите числа: ')
+    answer = input('yes/no: ')
+    set1 = set([int(i) for i in line.split()])
+    if answer.lower() == 'yes':
+        all_nums = set1.intersection(all_nums)
+    if answer.lower() == 'no':
+        all_nums = all_nums.difference(set1)
+    #print(all_nums)
+
+if len(all_nums) == 1:
+    print('ответ: {}'.format(list(all_nums)[0]))
+
+if len(all_nums) == 0:
+    print('что-то пошло не так...')
+    
+------------------------------------------
+Клиент-серверное программирование
+------------------------------------------
+
+import urllib.request as ur
+url = "http://rjabenkoae.000webhostapp.com/"
+conn = ur.urlopen(url)
+print(conn)
+
+data = conn.read()
+print(data.decode('utf-8'))
+print(conn.status)
+---------------------------------------------
+
+СЕРВЕР
+
+import socket
+import os
+import time
+
+socket = socket.socket()
+socket.bind(('', 6213))
+socket.listen(1)
+print('Server starting...')
+
+conn, addr = socket.accept()
+
+print('connected address:', addr)
+
+data = conn.recv(1024)
+message = data.decode('utf-8')
+print('got message:', message)
+
+conn.send(bytes(message.upper(), 'utf-8'))
+
+time.sleep(2.0)
+os.system('PAUSE')
+
+conn.close()
+print('Server closed')
+---------------------------------------------
+КЛИЕНТ
+
+import socket
+import os
+
+sock = socket.socket()
+sock.connect(('localhost', 6213))
+message = input('Your message: ')
+sock.send(bytes(message, 'utf-8'))
+
+data = sock.recv(1024)
+sock.close()
+
+print('delivered: ', data.decode('utf-8'))
+os.system('PAUSE')
+-----------------------------------------------
+
+na flashke ...
+
+*******************************************
+sock.send( open("file.jpg", "rb").read() )
+
+Спасибо. А принять как?)
+Как вариант:
+
+fp = open("file.jpg", "wb")
+while 1:
+    data = sock.read(4096)
+    if not data: break
+    fp.write(data)
+fp.close()
+******************************************  
+
+
+
+ООП
+class Dog:
+
+    # Class Attribute
+    species = 'mammal'
+
+    # Initializer / Instance Attributes
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    # instance method
+    def description(self):
+        return "{} is {} years old".format(self.name, self.age)
+
+    # instance method
+    def speak(self, sound):
+        print("{} says '{}'".format(self.name, sound))
+
+# Instantiate the Dog object
+mikey = Dog("Mikey", 6)
+
+# call our instance methods
+print(mikey.description())
+mikey.speak("Gruff Gruff")
+
+# Child class (inherits from Dog class)
+class RussellTerrier(Dog):
+    def run(self, speed):
+        print("{} runs with speed {}".format(self.name, speed))
+
+bobby = RussellTerrier('Bobby', 5)
+bobby.speak('Гав!')
+bobby.run(10)
+---------------------
+
+jupiter online link
+https://hub.mybinder.org/user/ipython-ipython-in-depth-biim4nck/notebooks/binder/Index.ipynb
