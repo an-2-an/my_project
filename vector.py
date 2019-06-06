@@ -1,4 +1,4 @@
-from math import sqrt
+from math import sqrt, acos, pi
 
 
 class Vector:
@@ -14,6 +14,11 @@ class Vector:
 		return '({})'.format(', '.join([str(c) for c in self.coords]))
 	def mult_k(self, k):
 		return Vector([k * c for c in self.coords])	
+	def __mul__(self, other):
+		return sum([(c1 * c2) for c1, c2 in zip(self.coords, other.coords)])
+	def alpha(self, other):
+		print(self*other, float(self), float(other))
+		return acos((self * other) / (float(self) * float(other))) / pi * 180
 
 
 if __name__ == '__main__':
@@ -29,3 +34,8 @@ if __name__ == '__main__':
 	print(d)
 	e = a.mult_k(2.5)
 	print(e)
+	p = a * b
+	print(p)
+	alpha = a.alpha(b)
+	print(alpha)
+
