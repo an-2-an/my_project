@@ -1,0 +1,339 @@
+OOP
+Class — A blueprint created by a programmer for an object. This defines 
+a set of attributes that will characterize any object that is instantiated from this class.
+
+Object — An instance of a class. This is the realized version of the class, where 
+the class is manifested in the program.
+------------------------------------------------
+
+class Shark:
+    def swim(self):
+        print("The shark is swimming.")
+
+    def be_awesome(self):
+        print("The shark is being awesome.")
+
+s = Shark()
+s.swim()
+s.be_awesome()
+
+------------------------------------------------
+
+class Dog:
+    def __init__(self, name):
+      self.name = name
+      print('dog {name} initiated'.format(name=name))
+
+    def bark(self):
+        print("{name} says WOF-WOF!".format(name=self.name))
+
+if __name__ == '__main__':
+
+	d1 = Dog('Buck')
+	d1.bark()
+	d2 = Dog('Snoopy')
+	d3 = Dog('Peppa')
+
+	dogs = [d1, d2, d3]
+	[d.bark() for d in dogs]
+
+-------------------------------------------------
+
+class Boy:
+	def __init__(self, name, age):
+		self.name = name
+		self.age = age
+	def introduce(self):
+		print('Hello, my name is {name}, I am {age} years old'.format(name=self.name, age=self.age))
+	def __str__(self):
+		return 'Boy [name={name}, age={age}]'.format(name=self.name, age=self.age) 
+
+if __name__ == '__main__':
+	misha = Boy('Misha', 11)
+	misha.introduce()
+	print(misha)
+	misha.name = 'Kolya'
+	misha.age += 2
+	misha.introduce()
+	print(misha)
+
+-------------------------------------------------
+Инкапсуляция — ограничение доступа к составляющим объект 
+компонентам (методам и переменным). Инкапсуляция делает 
+некоторые из компонент доступными только внутри класса.
+-------------------------------------------------
+
+class Boy:
+	def __init__(self, name, age):
+		self.__name = name
+		self.__age = age
+	def introduce(self):
+		print('Hello, my name is {name}, I am {age} years old'.format(name=self.__name, age=self.__age))
+	def __str__(self):
+		return 'Boy [name={name}, age={age}]'.format(name=self.__name, age=self.__age) 
+	def get_age(self):
+		return self.__age
+	def set_age(self, new_age):
+		self.__age = new_age
+
+if __name__ == '__main__':
+	misha = Boy('Misha', 11)
+	misha.introduce()
+	print(misha)
+	#misha.name = 'Kolya'
+	misha.set_age(misha.get_age() + 2)
+	misha.introduce()
+	print(misha)
+
+-------------------------------------------------
+Статические методы и поля
+не привязаны к какому-либо одному объекту класса
+
+class Boy:
+	adulthood_age = 18
+
+	...
+
+	@staticmethod
+	def what_about_boys():
+		print('All boys are good!')
+
+if __name__ == '__main__':
+	...
+	Boy.what_about_boys()
+	misha.what_about_boys()
+	print(Boy.adulthood_age)
+	print(misha.adulthood_age)
+
+-------------------------------------------------
+Насследование
+класс может наследовать данные и функциональность 
+некоторого существующего класса
+
+принцип DRY (Don't Repeat Yourself)
+
+class Tree():
+	
+	def __init__(self, kind, height):
+		self.kind = kind
+		self.height = height
+	def grow(self, step=0.5):
+		self.height += step
+	def __str__(self):
+		return '{kind}tree  is {height:.1f} metres height'.format(kind=self.kind, height=self.height)
+
+class FruitTree(Tree):
+	def __init__(self, kind, height, weight):
+		super().__init__(kind, height)
+		self.weight = weight
+	def __str__(self):
+		return super().__str__() + ', weight = {}'.format(self.weight)
+	def give_fruits(self):
+		print('{kind} tree gives us {weight}kg fruits'.format(kind=self.kind, weight=self.weight))
+		
+
+if __name__ == '__main__':
+	tree1 = Tree('oak', 5.0)
+	tree1.grow()
+	print(tree1)
+	tree2 = FruitTree('apple', 4.0, 20.0)
+	print(tree2)
+	tree2.give_fruits()
+-------------------------------------------------
+Множественное наследование
+
+class MyTime:
+	def __init__(self, h=0, m=0, s=0):
+		self.h, self.m, self.s = h, m, s
+	def __str__(self):
+		return '{:0>2d}:{:0>2d}:{:0>2d}'.format(self.h, self.m, self.s)
+	def tick(self):
+		self.s += 1
+		self.m += (self.s // 60)
+		self.s %= 60
+		self.h += (self.m // 60)
+		self.m %= 60
+		self.h %= 24
+
+class MyDate:
+	def __init__(self, day=1, month=1, year=2019):
+		self.day, self.month, self.year = day, month, year
+	def __str__(self):
+		return '{:0>2d}.{:0>2d}.{:0>4d}'.format(self.day, self.month, self.year)
+	def next_day(self):
+		if (self.day == 28 and self.month == 2) or\
+			(self.day == 30 and self.month in [4, 6, 9, 11]) or\
+			(self.day == 31 and self.month in [1, 3, 5, 7, 8, 10, 12]):
+			self.day = 1
+			self.next_month()
+		else:
+			self.day += 1
+	def next_month(self):
+		if self.month == 12:
+			self.month = 1
+			self.year += 1
+		else:
+			self.month += 1
+
+class MyDateTime(MyDate, MyTime):
+
+	def __init__(self, day=1, month=1, year=2019, h=0, m=0, s=0):
+		MyDate.__init__(self, day, month, year)
+		MyTime.__init__(self, h, m, s)
+
+	def __str__(self):
+		return MyDate.__str__(self) + ' - ' + MyTime.__str__(self)
+
+	def tick(self):
+		MyTime.tick(self)
+		if self.s == 0 and self.m == 0 and self.h == 0:
+			MyDate.next_day(self)
+
+if __name__ == '__main__':
+	t1 = MyTime(23, 59, 55)
+	for i in range(10):
+		print(t1)
+		t1.tick()
+	
+	d1 = MyDate(28, 12, 2000)
+	for i in range(10):
+		print(d1)
+		d1.next_day()
+
+	m1 = MyDateTime(31, 12, 2018, 23, 59, 55)
+	for i in range(10):
+		print(m1)
+		m1.tick()
+
+-------------------------------------------------
+ПОЛИМОРФИЗМ
+несколько наследуемых классов, с разной реализацией одного и того же метода
+
+class Student:
+	id = 0
+	def __init__(self, name):
+		self.name = name
+		self.id = Student.id
+		Student.id += 1
+	def __str__(self):
+		return 'Student {name}, id={id}'.format(name=self.name, id=self.id)
+	def speak(self):
+		print('Hi, I am {}, and I am student'.format(self.name))
+
+class Aspirant(Student):
+	def __init__(self, name):
+		Student.__init__(self, name)
+	def __str__(self):
+		return 'Aspirant {name}, id={id}'.format(name=self.name, id=self.id)
+	def speak(self):
+		print('Hi, I am {}, and I am aspirant'.format(self.name))
+	def say_hi(self):
+		print('Hi!')
+
+
+if __name__ == '__main__':
+	studiki = []
+	names = ['Vasya', 'Petya', 'Dasha', 'Masha']
+	for i in range(len(names)):
+		if i % 2 == 0: 
+			studiki.append(Student(names[i]))
+		else: 
+			studiki.append(Aspirant(names[i]))
+	
+	for s in studiki:
+		print(s)
+	for s in studiki:
+		s.speak()
+		if s.__class__.__name__ == 'Aspirant':
+			s.say_hi()
+		if isinstance(s, Aspirant):
+			s.say_hi()
+-------------------------------------------------
+
+MAGIC METHODS
+
+class Fraction:
+    def __init__(self, numerator: int, denominator: int):
+        self.numerator, self.denominator = numerator, denominator
+        self.reduce()
+
+    def reduce(self):
+        for i in range(min(self.denominator, self.numerator), 0, -1):
+            if self.numerator % i == 0 and self.denominator % i == 0:
+                self.numerator //= i
+                self.denominator //= i
+                break
+
+    def __str__(self):
+        if self.numerator == 0:
+            return '0'
+        else:
+            integer_part = self.numerator // self.denominator
+            if integer_part == 0:
+                return f'{self.numerator}/{self.denominator}'
+            else:
+                fraction_part = self.numerator - integer_part * self.denominator
+                if fraction_part == 0:
+                    return f'{integer_part}'
+                else:
+                    return f'{integer_part} {fraction_part}/{self.denominator}'
+
+    def __add__(self, other):
+        return Fraction(self.numerator * other.denominator + self.denominator * other.numerator,
+                        self.denominator * other.denominator)
+    def __sub__(self, other):
+        return Fraction(self.numerator * other.denominator - self.denominator * other.numerator,
+                        self.denominator * other.denominator)
+
+    def __float__(self):
+        return self.numerator / self.denominator
+
+    def __lt__(self, other):
+        return float(self) < float(other)
+
+if __name__ == '__main__':
+    f1 = Fraction(25,10)
+    print(f1)
+    d = {'numerator': 75, 'denominator': 30}
+    f2 = Fraction(**d)
+    print(f2)
+    f3 = f1 - f2
+    print(f3)
+    f = [Fraction(i, 12) for i in range(1, 12)]
+    print(', '.join([str(fr) for fr in f]))
+    import random
+    random.shuffle(f)
+    print(', '.join([str(fr) for fr in f]))
+    f.sort(key=lambda x: float(x))
+    print(', '.join([str(fr) for fr in f]))
+    random.shuffle(f)
+    print(', '.join([str(fr) for fr in f]))
+    f.sort()
+    print(', '.join([str(fr) for fr in f]))
+
+----------------------------------------------------------
+SORTING
+
+class Kitty:
+    def __init__(self, name, age):
+        self.name, self.age = name, age
+    def __str__(self):
+        return f'Kitty {self.name}, age: {self.age}'
+    def __lt__(self, other):
+        if self.name == other.name:
+            return self.age < other.age
+        else:
+            return self.name < other.name
+
+if __name__ == '__main__':
+    names = ['Mimy', 'Angus', 'Mimy', 'Barsik', 'Angus']
+    ages = [5, 3, 4, 2, 2]
+    cats = [Kitty(name, age) for name, age in zip(names, ages)]
+    for cat in sorted(cats, key=lambda x: (x.name, x.age)):
+        print(cat)
+    for cat in sorted(cats):
+        print(cat)
+----------------------------------------------------------
+
+
+
