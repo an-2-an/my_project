@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+  <style>
+  	.my-div {display: inline-block; width: 100px; height:100px; border: 2px black solid; margin: 20px; text-align: center; font-size: 50px;}
+  	#caption {margin-left: 50px;}
+  </style>
+ <title>Tic Tac Toe!</title>
+</head>
+<body>
+	
+	<table> 
+		<tr> 
+			<td><div class='my-div' id='1'></div></td>
+			<td><div class='my-div' id='2'></div></td>
+			<td><div class='my-div' id='3'></div></td>
+		</tr>
+		<tr> 
+			<td><div class='my-div' id='4'></div></td>
+			<td><div class='my-div' id='5'></div></td>
+			<td><div class='my-div' id='6'></div></td>
+		</tr>
+		<tr> 
+			<td><div class='my-div' id='7'></div></td>
+			<td><div class='my-div' id='8'></div></td>
+			<td><div class='my-div' id='9'></div></td>
+		</tr>
+	</table>
+	
+	<h1 id='caption'></h1>
+
+ 	<script>
+ 		var divs = document.getElementsByClassName('my-div');
+		//alert(divs.length);
+		
+		var sign = 'X';
+		var capts = ['', '', '', '', '', '', '', '', ''];
+		var go_on = true;
+		document.getElementById('caption').innerHTML = 'Ходит ' + sign;
+
+		function click(arg){
+			//alert(arg);
+			if(go_on && capts[arg] == ''){
+				divs[arg].innerHTML = sign;
+				capts[arg] = sign;
+				if(sign == 'X'){
+					divs[arg].style.backgroundColor = 'green';
+				} else {
+					divs[arg].style.backgroundColor = 'yellow';
+				}
+				check();
+			}
+		}
+
+		function check(){
+			if (
+				(capts[0] != '' && capts[0] == capts[1] && capts[1] == capts[2]) ||
+				(capts[0] != '' && capts[0] == capts[3] && capts[3] == capts[6]) ||
+				(capts[0] != '' && capts[0] == capts[4] && capts[4] == capts[8]) ||
+				(capts[1] != '' && capts[1] == capts[4] && capts[4] == capts[7]) ||
+				(capts[2] != '' && capts[2] == capts[5] && capts[5] == capts[8]) ||
+				(capts[2] != '' && capts[2] == capts[4] && capts[4] == capts[6]) ||
+				(capts[3] != '' && capts[3] == capts[4] && capts[4] == capts[5]) ||
+				(capts[6] != '' && capts[6] == capts[7] && capts[7] == capts[8]) 
+					){
+				winner();
+			} else {
+				sign = (sign == 'X') ? 'O' : 'X';
+				document.getElementById('caption').innerHTML = 'Ходит ' + sign;	
+			}
+		}
+
+		function winner(){
+			document.getElementById('caption').innerHTML = 'GAME OVER';	
+			alert('The winner is ' + sign + ' !!!');
+			go_on = false;
+		}
+
+
+		for( let i = 0; i < divs.length; i++ ){
+			divs[i].addEventListener('click', function(){
+				click(i);
+			});	
+		}
+
+ 	</script>
+</body>
+</html>
