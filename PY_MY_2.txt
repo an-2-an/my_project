@@ -498,21 +498,206 @@ print(mycar[0])
 #print(mycar['model']) ERROR
 
 ----------------------------------------------------------
+Тестирование (пример)
 
-OOP.txt
-fractions
-cats
+import unittest
+import sys
+
+def get_sum(a, b):
+    return a + b
+
+def is_even(a):
+    return a % 2 == 0
+
+def get_list_from_a_to_b(a, b):
+    return list(range(min(a, b), max(a, b)+1))
+
+class TestFunctions(unittest.TestCase):
+    def setUp(self):
+        self.data1 = [
+            {'params': [2, 3], 'target': 5},
+            {'params': [20, 35], 'target': 55},
+            ]
+
+    def test1(self):
+        for d in self.data1:
+            self.assertEqual(get_sum(*d['params']), d['target'])
+
+    def test2(self):
+        self.assertTrue(is_even(10))
+        self.assertFalse(is_even(7))
+        with self.assertRaises(TypeError):
+            is_even('yyy')
+
+    def test3(self):
+        self.assertEqual(get_list_from_a_to_b(1, 4), [1, 2, 3, 4])
+        self.assertEqual(get_list_from_a_to_b(8, 4), [4, 5, 6, 7, 8])
+
+    @unittest.skip('demo skipping')
+    def test_none(self):
+        pass
+
+    @unittest.skipIf((sys.platform.startswith('win')), 'not for windows')
+    def test_if(self):
+        pass
+
+    def test_fail(self):
+        self.fail('oooops...')
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)
+
+---------------------------------------------------------
+
+class Fraction:
+    def __init__(self, numerator: int, denominator: int = 1):
+        self.numerator, self.denominator = numerator, denominator
+        self.reduce()
+
+    def reduce(self):
+        for i in range(min(self.denominator, self.numerator), 0, -1):
+            if self.numerator % i == 0 and self.denominator % i == 0:
+                self.numerator //= i
+                self.denominator //= i
+                break
+
+    def __str__(self):
+        if self.numerator == 0:
+            return '0'
+        else:
+            integer_part = self.numerator // self.denominator
+            if integer_part == 0:
+                return f'{self.numerator}/{self.denominator}'
+            else:
+                fraction_part = self.numerator - integer_part * self.denominator
+                if fraction_part == 0:
+                    return f'{integer_part}'
+                else:
+                    return f'{integer_part} {fraction_part}/{self.denominator}'
+
+    def __add__(self, other):
+        return Fraction(self.numerator * other.denominator + self.denominator * other.numerator,
+                        self.denominator * other.denominator)
+    def __sub__(self, other):
+        return Fraction(self.numerator * other.denominator - self.denominator * other.numerator,
+                        self.denominator * other.denominator)
+
+    def __mul__(self, other):
+        return Fraction(self.numerator * other.numerator, self.denominator * other.denominator)
+
+    def __truediv__(self, other):
+        return Fraction(self.numerator * other.denominator, self.denominator * other.numerator)
+
+    def __pow__(self, power, modulo=None):
+        return Fraction(self.numerator**power, self.denominator**power)
+
+    def __float__(self):
+        return self.numerator / self.denominator
+
+    def __lt__(self, other):
+        return float(self) < float(other)
+
+    def __eq__(self, other):
+        return float(self) == float(other)
+
+if __name__ == '__main__':
+    f1 = Fraction(25,10)
+    print(f1)
+    d = {'numerator': 75, 'denominator': 30}
+    f2 = Fraction(**d)
+    print(f2)
+    f3 = f1 - f2
+    print(f3)
+    f = [Fraction(i, 12) for i in range(1, 12)]
+    print(', '.join([str(fr) for fr in f]))
+    import random
+    random.shuffle(f)
+    print(', '.join([str(fr) for fr in f]))
+    f.sort(key=lambda x: float(x))
+    print(', '.join([str(fr) for fr in f]))
+    random.shuffle(f)
+    print(', '.join([str(fr) for fr in f]))
+    f.sort()
+    print(', '.join([str(fr) for fr in f]))
+
+    f4 = f1 / f2
+    print(f4)
+
+---------------------------------------------------------
+тестируем Fractions
+
+import unittest
+from fraction import Fraction
+
+class TestFraction(unittest.TestCase):
+
+    def setUp(self):
+        self.a = Fraction(2, 3)
+        self.b = Fraction(1, 6)
+        print(f'a = {self.a}')
+        print(f'b = {self.b}')
+
+    def test1(self):
+        '''Тестируем сумму'''
+        res = self.a + self.b
+        mustbe = Fraction(5, 6)
+        print(res)
+        self.assertEqual(res, mustbe)
+
+    def test2(self):
+        '''Тестируем разность'''
+        res = self.a - self.b
+        mustbe = Fraction(1, 2)
+        print(res)
+        self.assertEqual(res, mustbe)
+
+    def test3(self):
+        '''Тестируем произведение, деление и степень'''
+        res = self.a * self.b
+        mustbe = Fraction(1, 9)
+        print(res)
+        self.assertEqual(res, mustbe)
+        res = self.a / self.b
+        mustbe = Fraction(4)
+        print(res)
+        self.assertEqual(res, mustbe)
+        res = self.a ** 3
+        mustbe = Fraction(8, 27)
+        print(res)
+        self.assertEqual(res, mustbe)
+
+    def test4(self):
+        '''тестируем равенство дробей'''
+        self.assertTrue(self.b, Fraction(3, 18))
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)
+
+---------------------------------------------------------
+cats - сортировка по нескольким критериям
+
+class Kitty:
+    def __init__(self, name, age):
+        self.name, self.age = name, age
+    def __str__(self):
+        return f'Kitty {self.name}, age: {self.age}'
+    def __lt__(self, other):
+        if self.name == other.name:
+            return self.age < other.age
+        else:
+            return self.name < other.name
+
+if __name__ == '__main__':
+    names = ['Mimy', 'Angus', 'Mimy', 'Barsik', 'Angus']
+    ages = [5, 3, 4, 2, 2]
+    cats = [Kitty(name, age) for name, age in zip(names, ages)]
+    for cat in sorted(cats, key=lambda x: (x.name, x.age)):
+        print(cat)
+    for cat in sorted(cats):
+        print(cat)
+
 
 ----------------------------------------------------------
-
-
-
-------------------
-
-try_test
-
-----------------
-
 
 
 постфиксный стек
