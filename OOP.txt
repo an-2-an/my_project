@@ -364,4 +364,56 @@ if __name__ == '__main__':
 
 ----------------------------------------------------
 
+Кроме наследования, существует и другой способ организации 
+межклассового взаимодействия – ассоциация (агрегация или композиция),
+при которой один класс является полем другого.
+
+Пример композиции:
+
+class Salary:
+    def __init__(self, pay):
+        self.pay = pay
+
+    def getTotal(self):
+        return (self.pay * 12)
+
+
+class Employee:
+    def __init__(self, name, pay, bonus):
+        self.name = name
+        self.bonus = bonus
+        self.salary = Salary(pay)
+
+    def annualSalary(self):
+        print(f"{self.name}\'s total: {self.salary.getTotal() + self.bonus}")
+
+if __name__ == '__main__':
+    employee = Employee('Ben', 100, 10)
+    employee.annualSalary()
+----------------------------------------------------------
+
+Пример агрегации:
+
+class Salary:
+    def __init__(self, pay):
+        self.pay = pay
+
+    def getTotal(self):
+        return (self.pay * 12)
+
+
+class Employee:
+    def __init__(self, name, salary, bonus):
+        self.name = name
+        self.bonus = bonus
+        self.salary = salary
+
+    def annualSalary(self):
+        print(f"{self.name}\'s total: {self.salary.getTotal() + self.bonus}")
+
+if __name__ == '__main__':
+    salary = Salary(100)
+    employee = Employee('Ben', salary, 10)
+    employee.annualSalary()
+------------------------------------------------------------
 
