@@ -311,6 +311,33 @@ if __name__ == '__main__':
     f.sort()
     print(', '.join([str(fr) for fr in f]))
 
+---------------------------------------------------------
+
+from collections import namedtuple
+
+
+Car = namedtuple('Car', 'color brand')
+
+class Garage:
+    def __init__(self):
+        self.cars = [
+            Car('brown', 'BMW'),
+            Car('red', 'Audi'),
+            Car('black', 'Hummer'),
+        ]
+    def __len__(self):
+        return len(self.cars)
+    def __getitem__(self, pos):
+        return self.cars[pos]
+
+g = Garage()
+print(len(g))
+
+print(g[0])
+
+for c in g:
+    print(c.brand)
+
 ----------------------------------------------------------
 SORTING
 
