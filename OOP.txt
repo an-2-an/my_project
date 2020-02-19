@@ -140,7 +140,6 @@ if __name__ == '__main__':
 	print(tree2)
 	tree2.give_fruits()
 -------------------------------------------------
-
 class Girl:
     
     def __init__(self, name, brand):
@@ -149,10 +148,15 @@ class Girl:
     def __str__(self):
         return f'{self.name} носит {self.brand}'
     
-    @staticmethod
-    def generate(names, brands):
+    # @staticmethod
+    # def generate(names, brands):
+    #     for n, b in zip(names, brands):
+    #         yield Girl(n, b)
+
+    @classmethod
+    def generate(cls, names, brands):
         for n, b in zip(names, brands):
-            yield Girl(n, b)
+            yield cls(n, b)
 
 if __name__ == '__main__':
     names = ('Оля', 'Таня', 'Света')
