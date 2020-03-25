@@ -232,6 +232,45 @@ if __name__ == '__main__':
 		m1.tick()
 
 -------------------------------------------------
+"ромбовидное" наследование
+
+class SuperHero:
+    def __init__(self, name):
+        self.name = name
+    def __str__(self):
+        return f"I am {self.name}"
+
+class FlyingSuperHero(SuperHero):
+    def __str__(self):
+        return SuperHero.__str__(self) + ", and I can fly"
+    def fly(self):
+        print(f'{self.name} is flying!')
+
+class HotSuperHero(SuperHero):
+    def __str__(self):
+        return SuperHero.__str__(self) + ", and I am hot"
+    def mimimi(self):
+        print(f'{self.name} is nice')
+
+class FlyingHotSuperHero(FlyingSuperHero, HotSuperHero):
+    def __str__(self):
+        return SuperHero.__str__(self) + ", and I can fly, and I am hot!!!"
+
+if __name__ == '__main__':
+    batman = SuperHero('Batman')
+    print(batman)
+    superman = FlyingSuperHero('Superman')
+    print(superman)
+    superman.fly()
+    catwoman = HotSuperHero("Catwoman")
+    print(catwoman)
+    catwoman.mimimi()
+    supergirl = FlyingHotSuperHero('Supergirl')
+    print(supergirl)
+    supergirl.fly()
+    supergirl.mimimi()
+
+---------------------------------------------------
 ПОЛИМОРФИЗМ
 несколько наследуемых классов, с разной реализацией одного и того же метода
 
