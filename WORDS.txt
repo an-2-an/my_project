@@ -1,6 +1,9 @@
-boy мальчик
-girl девочка
-game игра
-play играть
 ball мяч
+boy мальчик
+game игра
+girl девочка
+man мужчина
 name имя
+play играть
+
+
