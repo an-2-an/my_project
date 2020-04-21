@@ -1,3 +1,4 @@
+apple яблоко
 ball мяч
 boy мальчик
 game игра
