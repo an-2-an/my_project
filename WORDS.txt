@@ -1,6 +1,8 @@
 apple яблоко
 ball мяч
 boy мальчик
+eat кушать
+fish рыба
 game игра
 girl девочка
 man мужчина
