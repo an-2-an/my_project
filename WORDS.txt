@@ -1,5 +1,6 @@
 apple яблоко
 ball мяч
+bear медведь
 boy мальчик
 eat кушать
 fish рыба
@@ -8,6 +9,9 @@ girl девочка
 man мужчина
 name имя
 play играть
+rabbit кролик
+sofa диван
 woman женщина
+queen королева
 
 
