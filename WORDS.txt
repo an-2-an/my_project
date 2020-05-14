@@ -2,6 +2,7 @@ apple яблоко
 ball мяч
 bear медведь
 boy мальчик
+brother брат
 eat кушать
 fish рыба
 game игра
@@ -11,6 +12,7 @@ name имя
 play играть
 rabbit кролик
 sofa диван
+sister сестра
 woman женщина
 queen королева
 
