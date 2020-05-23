@@ -3,6 +3,7 @@ ball мяч
 bear медведь
 boy мальчик
 brother брат
+doctor доктор
 eat кушать
 fish рыба
 game игра
@@ -13,6 +14,7 @@ play играть
 rabbit кролик
 sofa диван
 sister сестра
+teacher учитель
 woman женщина
 queen королева
 
