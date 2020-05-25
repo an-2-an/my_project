@@ -272,6 +272,27 @@ if __name__ == '__main__':
     supergirl.mimimi()
 
 ---------------------------------------------------
+АБСТРАКТНЫЕ КЛАССЫ И МЕТОДЫ
+
+from abc import ABC, abstractmethod
+
+class A(ABC):
+    @abstractmethod
+    def do_something(self):
+        pass
+
+# a = A() # error
+
+class B(A):
+    def do_something(self):
+        print('do something')
+    def do_something_else(self):
+        print('do something else')
+
+b = B()
+b.do_something()
+b.do_something_else()
+-----------------------------------------------------
 ПОЛИМОРФИЗМ
 несколько наследуемых классов, с разной реализацией одного и того же метода
 
