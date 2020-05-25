@@ -81,6 +81,7 @@ if __name__ == '__main__':
 	misha.introduce()
 	print(misha)
 	#misha.name = 'Kolya'
+	misha._Boy__name = 'Kolya'
 	misha.set_age(misha.get_age() + 2)
 	misha.introduce()
 	print(misha)
