@@ -688,7 +688,50 @@ if __name__ == '__main__':
     employee = Employee('Ben', salary, 10)
     employee.annualSalary()
 ------------------------------------------------------------
+ПАТТЕРН НАБЛЮДАТЕЛЬ
 
+from abc import ABC, abstractmethod
+
+class NotificationManager:
+    def __init__(self):
+        self.subscribers = set()
+    def subscribe(self, subscriber):
+        self.subscribers.add(subscriber)
+    def notify(self, message):
+        for s in self.subscribers:
+            s.update(message)
+
+class AbstractObserver(ABC):
+    def __init__(self, name):
+        self.name = name
+    @abstractmethod
+    def update(self, message):
+        pass
+
+class MessageNotifier(AbstractObserver):
+    def update(self, message):
+        print(f'{self.name} получил сообщение')
+    
+class MessagePrinter(AbstractObserver):
+    def update(self, message):
+        print(f'{self.name} получил сообщение: \"{message}\"')
+
+
+if __name__ == '__main__':
+    notifier1 = MessageNotifier('Вася')
+    printer1 = MessagePrinter('Вася')
+    notifier2 = MessageNotifier('Петя')
+    printer2 = MessagePrinter('Петя')
+
+    manager = NotificationManager()
+    manager.subscribe(notifier1)
+    manager.subscribe(printer1)
+    manager.subscribe(notifier2)
+    manager.subscribe(printer2)
+
+    manager.notify('Привет!')
+
+------------------------------------------------------------
 БАЗА ДАННЫХ ООП-стайл
 
 class Worker:
