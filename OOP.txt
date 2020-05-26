@@ -336,6 +336,54 @@ if __name__ == '__main__':
 		if isinstance(s, Aspirant):
 			s.say_hi()
 -------------------------------------------------
+ДЕКОРАТОРЫ КЛАССОВ
+
+class Animal:
+    def feed(self):
+        print('ем траву')
+    def move(self):
+        print('двигаюсь вперед')
+
+class Decorator:
+    def __init__(self, base):
+        self.base = base
+    def feed(self):
+        self.base.feed()
+    def move(self):
+        self.base.move()
+
+class Swimming(Decorator):
+    def move(self):
+        print('плыву себе')
+
+class Predator(Decorator):
+    def feed(self):
+        print('ем животных')
+
+class Faster(Decorator):
+    def move(self):
+        self.base.move()
+        print('быстро')
+
+
+if __name__ == '__main__':
+    animal = Animal()
+    animal.feed()
+    animal.move()
+    
+    swimming = Swimming(animal)
+    swimming.feed()
+    swimming.move()
+
+    swimming_predator = Predator(swimming)
+    swimming_predator.feed()
+    swimming_predator.move()
+
+    fast = Faster(animal)
+    faster = Faster(fast)
+    faster.feed()
+    faster.move()
+-------------------------------------------------
 
 MAGIC METHODS
 
