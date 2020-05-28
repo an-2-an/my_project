@@ -16,6 +16,7 @@ sofa диван
 sister сестра
 table стол
 teacher учитель
+window окно
 woman женщина
 queen королева
 
