@@ -14,6 +14,7 @@ play играть
 rabbit кролик
 sofa диван
 sister сестра
+table стол
 teacher учитель
 woman женщина
 queen королева
