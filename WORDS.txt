@@ -19,5 +19,7 @@ teacher учитель
 window окно
 woman женщина
 queen королева
+school школа
+sing петь
 
 
