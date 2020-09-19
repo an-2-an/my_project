@@ -7,55 +7,82 @@ the class is manifested in the program.
 ------------------------------------------------
 
 class Shark:
+
     def swim(self):
-        print("The shark is swimming.")
+        print('акула плывет')
 
-    def be_awesome(self):
-        print("The shark is being awesome.")
+    def bite(self):
+        print('акула кусает')
 
-s = Shark()
-s.swim()
-s.be_awesome()
+    def swim_n_bite(self):
+        self.swim()
+        self.bite()
+
+
+if __name__ == '__main__':
+    s = Shark()
+    # s.swim()
+    # s.bite()
+    s.swim_n_bite()
 
 ------------------------------------------------
 
 class Dog:
+
     def __init__(self, name):
-      self.name = name
-      print('dog {name} initiated'.format(name=name))
+        print(f'собака {name} создана')
+        self.name = name
 
     def bark(self):
-        print("{name} says WOF-WOF!".format(name=self.name))
+        print(f'{self.name} говорит \"гав-гав!\"')
+
 
 if __name__ == '__main__':
+    dog1 = Dog('Кузя')
+    dog2 = Dog('Туся')
 
-	d1 = Dog('Buck')
-	d1.bark()
-	d2 = Dog('Snoopy')
-	d3 = Dog('Peppa')
+    dog1.bark()
+    dog2.bark()
 
-	dogs = [d1, d2, d3]
-	[d.bark() for d in dogs]
+    dog3 = Dog('Снуппи')
+
+    dogs = [dog1, dog2, dog3]
+
+    # for dog in dogs:
+    #     dog.bark()
+
+    [dog.bark() for dog in dogs]
 
 -------------------------------------------------
 
 class Boy:
-	def __init__(self, name, age):
-		self.name = name
-		self.age = age
-	def introduce(self):
-		print('Hello, my name is {name}, I am {age} years old'.format(name=self.name, age=self.age))
-	def __str__(self):
-		return 'Boy [name={name}, age={age}]'.format(name=self.name, age=self.age) 
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def introduce(self):
+        print(f'Привет, я {self.name}, и мне {self.age}')
+
+    def __str__(self):
+        return f'мальчик {self.name}, возраст: {self.age}'
+
 
 if __name__ == '__main__':
-	misha = Boy('Misha', 11)
-	misha.introduce()
-	print(misha)
-	misha.name = 'Kolya'
-	misha.age += 2
-	misha.introduce()
-	print(misha)
+    misha = Boy('Миша', 13)
+    misha.introduce()
+    print(misha)
+
+    misha.name = 'Коля'
+    misha.age += 2
+
+    misha.introduce()
+
+    print(misha)
+
+    line = f'описание объекта: {misha}'
+
+    print(line)
 
 -------------------------------------------------
 Инкапсуляция — ограничение доступа к составляющим объект 
@@ -64,47 +91,83 @@ if __name__ == '__main__':
 -------------------------------------------------
 
 class Boy:
-	def __init__(self, name, age):
-		self.__name = name
-		self.__age = age
-	def introduce(self):
-		print('Hello, my name is {name}, I am {age} years old'.format(name=self.__name, age=self.__age))
-	def __str__(self):
-		return 'Boy [name={name}, age={age}]'.format(name=self.__name, age=self.__age) 
-	def get_age(self):
-		return self.__age
-	def set_age(self, new_age):
-		self.__age = new_age
+
+    def __init__(self, name, age):
+        self.__name = name
+        self.__age = age
+
+    def introduce(self):
+        print(f'Привет, я {self.__name}, и мне {self.__age}')
+
+    def __str__(self):
+        return f'мальчик {self.__name}, возраст: {self.__age}'
+
+    def grow(self):
+        self.__age += 1
+
+    # getter age
+    def get_age(self):
+        return self.__age
+
+    # setter name
+    def set_name(self, new_name):
+        self.__name = new_name
 
 if __name__ == '__main__':
-	misha = Boy('Misha', 11)
-	misha.introduce()
-	print(misha)
-	#misha.name = 'Kolya'
-	misha._Boy__name = 'Kolya'
-	misha.set_age(misha.get_age() + 2)
-	misha.introduce()
-	print(misha)
+    misha = Boy('Миша', 13)
+    misha.introduce()
+    print(misha)
+
+    # misha.__age += 2
+    # print(misha.__name)
+
+    misha.grow()
+    print(misha)
+    print(misha.get_age())
+
+    misha.set_name('Михаил')
+    print(misha)
 
 -------------------------------------------------
 Статические методы и поля
 не привязаны к какому-либо одному объекту класса
 
 class Boy:
-	adulthood_age = 18
 
-	...
+    adult_age = 18
 
-	@staticmethod
-	def what_about_boys():
-		print('All boys are good!')
+    @staticmethod
+    def what_about_boys():
+        print('Все мальчики хорошие (когда спят)')
+
+    def __init__(self, name, age):
+        self.__name = name
+        self.__age = age
+
+    def introduce(self):
+        print(f'Привет, я {self.__name}, и мне {self.__age}')
+
+    def __str__(self):
+        return f'мальчик {self.__name}, возраст: {self.__age}'
+
+    def grow(self):
+        self.__age += 1
+
+    def can_drink_beer(self):
+        return self.__age >= Boy.adult_age
+
 
 if __name__ == '__main__':
-	...
-	Boy.what_about_boys()
-	misha.what_about_boys()
-	print(Boy.adulthood_age)
-	print(misha.adulthood_age)
+    Boy.adult_age = 19
+    print(Boy.adult_age)
+
+    Boy.what_about_boys()
+
+    misha = Boy('Миша', 16)
+    for i in range(4):
+        misha.grow()
+        print(misha, '' if misha.can_drink_beer() else 'не', 'может пить пиво')
+
 
 -------------------------------------------------
 Насследование
@@ -113,33 +176,40 @@ if __name__ == '__main__':
 
 принцип DRY (Don't Repeat Yourself)
 
-class Tree():
-	
-	def __init__(self, kind, height):
-		self.kind = kind
-		self.height = height
-	def grow(self, step=0.5):
-		self.height += step
-	def __str__(self):
-		return '{kind}tree  is {height:.1f} metres height'.format(kind=self.kind, height=self.height)
+class Tree:
+
+    def __init__(self, breed, height):
+        self.breed, self.height = breed, height
+
+    def __str__(self):
+        return f'дерево породы {self.breed}, высотой {self.height} м'
+
+    def grow(self, step=0.5):
+        self.height += step
+
 
 class FruitTree(Tree):
-	def __init__(self, kind, height, weight):
-		super().__init__(kind, height)
-		self.weight = weight
-	def __str__(self):
-		return super().__str__() + ', weight = {}'.format(self.weight)
-	def give_fruits(self):
-		print('{kind} tree gives us {weight}kg fruits'.format(kind=self.kind, weight=self.weight))
-		
+
+    def __init__(self, breed, height, harvest):
+        super().__init__(breed, height)
+        self.harvest = harvest
+
+    def __str__(self):
+        return f'фруктовое {super().__str__()}'
+
+    def give_fruits(self):
+        print(f'{self.breed} дает аж {self.harvest} кг урожая')
 
 if __name__ == '__main__':
-	tree1 = Tree('oak', 5.0)
-	tree1.grow()
-	print(tree1)
-	tree2 = FruitTree('apple', 4.0, 20.0)
-	print(tree2)
-	tree2.give_fruits()
+    oak = Tree('дуб', 7.5)
+    print(oak)
+    oak.grow()
+    print(oak)
+
+    plum = FruitTree('слива', 4.8, 20.0)
+    plum.grow(1.0)
+    print(plum)
+    plum.give_fruits()
 -------------------------------------------------
 class Girl:
     
