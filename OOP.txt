@@ -186,6 +186,8 @@ if __name__ == '__main__':
     c1 = Circle(radius=10)
     print(c1.area)
 -------------------------------------------------
+метод с self - метод экземпляра класса
+
 Статические методы и поля
 не привязаны к какому-либо одному объекту класса
 
@@ -424,44 +426,58 @@ b.do_something_else()
 несколько наследуемых классов, с разной реализацией одного и того же метода
 
 class Student:
-	id = 0
-	def __init__(self, name):
-		self.name = name
-		self.id = Student.id
-		Student.id += 1
-	def __str__(self):
-		return 'Student {name}, id={id}'.format(name=self.name, id=self.id)
-	def speak(self):
-		print('Hi, I am {}, and I am student'.format(self.name))
+    id = 0
+
+    def __init__(self, name):
+        self.name = name
+        self.id = Student.id
+        Student.id += 1
+
+    @classmethod
+    def how_many(cls):
+        print(f'We have got {cls.id} persons')
+
+    def __str__(self):
+        return 'Student {name}, id={id}'.format(name=self.name, id=self.id)
+
+    def speak(self):
+        print('Hi, I am {}, and I am student'.format(self.name))
+
 
 class Aspirant(Student):
-	def __init__(self, name):
-		Student.__init__(self, name)
-	def __str__(self):
-		return 'Aspirant {name}, id={id}'.format(name=self.name, id=self.id)
-	def speak(self):
-		print('Hi, I am {}, and I am aspirant'.format(self.name))
-	def say_hi(self):
-		print('Hi!')
+    def __init__(self, name):
+        Student.__init__(self, name)
+
+    def __str__(self):
+        return 'Aspirant {name}, id={id}'.format(name=self.name, id=self.id)
+
+    def speak(self):
+        print('Hi, I am {}, and I am aspirant'.format(self.name))
+
+    def say_hi(self):
+        print('Hi!')
 
 
 if __name__ == '__main__':
-	studiki = []
-	names = ['Vasya', 'Petya', 'Dasha', 'Masha']
-	for i in range(len(names)):
-		if i % 2 == 0: 
-			studiki.append(Student(names[i]))
-		else: 
-			studiki.append(Aspirant(names[i]))
-	
-	for s in studiki:
-		print(s)
-	for s in studiki:
-		s.speak()
-		if s.__class__.__name__ == 'Aspirant':
-			s.say_hi()
-		if isinstance(s, Aspirant):
-			s.say_hi()
+    studiki = []
+    names = ['Vasya', 'Petya', 'Dasha', 'Masha']
+    for i in range(len(names)):
+        if i % 2 == 0:
+            studiki.append(Student(names[i]))
+        else:
+            studiki.append(Aspirant(names[i]))
+
+    Student.how_many()
+
+    for s in studiki:
+        print(s)
+    for s in studiki:
+        s.speak()
+        if s.__class__.__name__ == 'Aspirant':
+            s.say_hi()
+        if isinstance(s, Aspirant):
+            s.say_hi()
+	    
 -------------------------------------------------
 ДЕКОРАТОРЫ КЛАССОВ
 
