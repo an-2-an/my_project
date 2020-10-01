@@ -4,6 +4,15 @@ a set of attributes that will characterize any object that is instantiated from 
 
 Object — An instance of a class. This is the realized version of the class, where 
 the class is manifested in the program.
+-----------------------------------------------
+
+class Person:
+    def __init__(self):
+        print('объект создан')
+
+if __name__ == '__main__':
+    person = Person()
+
 ------------------------------------------------
 
 class Shark:
@@ -24,6 +33,7 @@ if __name__ == '__main__':
     # s.swim()
     # s.bite()
     s.swim_n_bite()
+    Shark.swim_n_bite(s)
 
 ------------------------------------------------
 
@@ -127,7 +137,54 @@ if __name__ == '__main__':
 
     misha.set_name('Михаил')
     print(misha)
+------------------------------------------------
 
+class Duck:
+    def __init__(self, input_name):
+        self.hidden_name = input_name
+    def get_name(self):
+        print('getter!')
+        return self.hidden_name
+    def set_name(self, new_name):
+        self.hidden_name = new_name
+    name = property(get_name, set_name)
+
+if __name__ == '__main__':
+    duck = Duck('Donald')
+    print(duck.name)
+    duck.name = 'Scrooge McDuck'
+    print(duck.name)
+    print(duck.get_name())
+    
+------------------------------------------------
+class Duck:
+    def __init__(self, input_name):
+        self.hidden_name = input_name
+    @property
+    def name(self):
+        print('getter!')
+        return self.hidden_name
+    @name.setter
+    def name(self, new_name):
+        self.hidden_name = new_name
+
+if __name__ == '__main__':
+    duck = Duck('Donald')
+    print(duck.name)
+    duck.name = 'Scrooge McDuck'
+    print(duck.name)
+    # print(duck.get_name())
+-------------------------------------------------
+class Circle:
+    def __init__(self, radius):
+        self.radius = radius
+    @property
+    def area(self):
+        return 3.1415926 * self.radius ** 2
+
+if __name__ == '__main__':
+    c1 = Circle(radius=10)
+    print(c1.area)
 -------------------------------------------------
 Статические методы и поля
 не привязаны к какому-либо одному объекту класса
