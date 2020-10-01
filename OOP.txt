@@ -270,30 +270,39 @@ if __name__ == '__main__':
     print(plum)
     plum.give_fruits()
 -------------------------------------------------
+генерируем список объектов класса 
+classmethod vs staticmethod
+
 class Girl:
-    
     def __init__(self, name, brand):
         self.name, self.brand = name, brand
-    
+
     def __str__(self):
-        return f'{self.name} носит {self.brand}'
-    
-    # @staticmethod
-    # def generate(names, brands):
-    #     for n, b in zip(names, brands):
-    #         yield Girl(n, b)
+        return f'{self.name} носит \"{self.brand}\"'
+
+    @staticmethod
+    def generate(names, brands):
+        for name, brand in zip(names, brands):
+            yield Girl(name, brand)
 
     @classmethod
-    def generate(cls, names, brands):
-        for n, b in zip(names, brands):
-            yield cls(n, b)
+    def get_list(cls, names, brands):
+        return [cls(n, b) for n, b in zip(names, brands)]
 
 if __name__ == '__main__':
-    names = ('Оля', 'Таня', 'Света')
-    brands = ('Prada', 'Balenciaga', 'Zara')
-    girls = list(Girl.generate(names, brands))
-    for g in girls:
-        print(g)
+    olya = Girl('Оля', 'Gucci')
+    print(olya)
+
+    names = 'Света Катя Лена'.split()
+    brands = 'Armani Prada LV'.split()
+
+    # girls = list(Girl.generate(names, brands))
+    # print(girls)
+    
+    girls = Girl.get_list(names, brands)
+
+    for girl in girls:
+        print(girl)
 
 -------------------------------------------------
 Множественное наследование
