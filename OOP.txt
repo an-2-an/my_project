@@ -488,6 +488,47 @@ if __name__ == '__main__':
             s.say_hi()
 	    
 -------------------------------------------------
+СЕРИАЛИЗАЦИЯ ОБЪЕКТОВ КЛАССА
+
+import pickle
+
+class Phone:
+    def __init__(self, brand):
+        self.brand = brand
+    def __str__(self):
+        return f'Phone({self.brand=})'
+    def beep(self):
+        print('beep')
+
+if __name__ == '__main__':
+    p = Phone('Nokia')
+    s = pickle.dumps(p)
+    print(s)
+
+    p1 = pickle.loads(s)
+    print(p1, type(p1))
+    p1.beep()
+    
+-------------------------------------------------
+import json
+
+class Phone:
+    def __init__(self, brand):
+        self.brand = brand
+    def __str__(self):
+        return f'Phone({self.brand=})'
+    def beep(self):
+        print('beep')
+
+if __name__ == '__main__':
+    p = Phone('Nokia')
+    print(p.__dict__, type(p.__dict__))
+    s = json.dumps(p.__dict__)
+
+    p1 = Phone(**json.loads(s))
+    print(p1)
+-------------------------------------------------
+
 ДЕКОРАТОРЫ КЛАССОВ
 
 class Animal:
